@@ -371,4 +371,4 @@ Each ticket will contain the command to run that ticket's specific unit tests.
 Using the Docker image
 ----------------------
 
-If you are going to use the docker image, make sure to replace the image name in the `entry.sh` file with you image name.
+If you are going to use the docker image, make sure to replace the image name in the ``entry.sh`` file with your image name.
