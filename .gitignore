@@ -26,4 +26,3 @@ htmlcov/
 .coverage.*
 *,cover
 .ini
-entry.sh

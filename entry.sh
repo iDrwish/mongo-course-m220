@@ -1,0 +1,2 @@
+docker run --rm -p 10000:8888 --env-file .env -d -v $(pwd):/code mongocourse jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root
+docker run -d -p 5000:5000 --env-file .env --restart=unless-stopped -v $(pwd):/code mongocourse python run.py
