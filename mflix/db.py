@@ -46,9 +46,11 @@ def get_db():
         db = g._database = MongoClient(
             MFLIX_DB_URI,
             # TODO: Connection Pooling
+            maxPoolSize=50,
             # Set the maximum connection pool size to 50 active connections.
             # TODO: Timeouts
             # Set the write timeout limit to 2500 milliseconds.
+            wTimeoutMS=2500
         )[MFLIX_DB_NAME]
     return db
 
@@ -554,7 +556,19 @@ def most_active_commenters():
     """
     # TODO: User Report
     # Return the 20 users who have commented the most on MFlix.
-    pipeline = []
+    pipeline = [
+        {'$group': {'_id': '$email',
+                    'count': {
+                        '$sum': 1
+                    }
+                    }
+         },
+        {'$sort':
+         {'count': -1
+          }
+         },
+        {'$limit': 20}
+    ]
 
     rc = db.comments.read_concern  # you may want to change this read concern!
     comments = db.comments.with_options(read_concern=rc)
